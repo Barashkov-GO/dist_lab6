@@ -21,6 +21,7 @@ public class ZooWatcher implements Watcher {
     }
 
     private void sendAnswer() {
-        List<String> servers = new ArrayList<>;
+        List<String> servers = new ArrayList<>();
+        
     }
 }
