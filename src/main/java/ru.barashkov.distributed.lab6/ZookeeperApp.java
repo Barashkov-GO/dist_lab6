@@ -24,6 +24,7 @@ public class ZookeeperApp {
             new ZooWatcher(zk, actorStorage);
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(-1);
         }
     }
 }
