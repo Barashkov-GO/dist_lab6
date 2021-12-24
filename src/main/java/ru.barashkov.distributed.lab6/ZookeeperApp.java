@@ -37,7 +37,7 @@ public class ZookeeperApp {
         }
 
         List<CompletionStage<ServerBinding>> bindings = new ArrayList<>();
-        String serversInfo = "Servers:\n";
+        StringBuilder serversInfo = new StringBuilder("Servers:\n");
 
 
         for (int i = 1; i < args.length; i++) {
@@ -48,7 +48,7 @@ public class ZookeeperApp {
                     ConnectHttp.toHost("", Integer.parseInt(args[i])),
                     materializer
             ));
-            serversInfo += "http://localhost:" + args[i] + "";
+            serversInfo.append("http://localhost:").append(args[i]).append("/\n");
         }
     }
 }
