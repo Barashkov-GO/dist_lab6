@@ -4,5 +4,8 @@ import java.util.List;
 
 public class MessageGetList {
     private final List<String> servers;
-    
+
+    public MessageGetList() {
+        
+    }
 }
