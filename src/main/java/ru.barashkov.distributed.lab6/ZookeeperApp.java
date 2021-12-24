@@ -12,6 +12,7 @@ public class ZookeeperApp {
         ActorRef storage = system.actorOf(Props.create(ActorStorage.class));
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
-        final Http http = Http.get(system)
+        final Http http = Http.get(system);
+        Zook
     }
 }
