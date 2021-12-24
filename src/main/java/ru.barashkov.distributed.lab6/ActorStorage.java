@@ -14,6 +14,8 @@ public class StorageActor extends AbstractActor {
     }
 
     @Override
-    public Receive 
+    public Receive createReceive() {
+        
+    }
 
 }
