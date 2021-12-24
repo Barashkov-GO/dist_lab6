@@ -6,10 +6,10 @@ import akka.http.javadsl.server.Route;
 import org.apache.zookeeper.*;
 
 public class ServerStorage implements Watcher {
-    private Http http;
-    private ActorRef actorStorage;
-    private ZooKeeper zooKeeper;
-    private String way;
+    private final Http http;
+    private final ActorRef actorStorage;
+    private final ZooKeeper zooKeeper;
+    private final String way;
     private static final String URL = "localhost:";
     private static final String SERVERS = "/servers/";
 
