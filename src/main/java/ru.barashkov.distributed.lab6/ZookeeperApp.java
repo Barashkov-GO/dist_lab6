@@ -56,6 +56,6 @@ public class ZookeeperApp {
             }
         }
 
-        if (binding)
+        if (bindings.size())
     }
 }
