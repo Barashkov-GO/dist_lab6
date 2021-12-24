@@ -11,8 +11,8 @@ import java.util.List;
 
 public class ZooWatcher implements Watcher {
     private static final String SERVERS_PATH = "/servers";
-    private ZooKeeper zooKeeper;
-    private ActorRef actorStorage;
+    private final ZooKeeper zooKeeper;
+    private final ActorRef actorStorage;
 
     public ZooWatcher(ZooKeeper zooKeeper, ActorRef actorStorage) throws InterruptedException, KeeperException {
         this.zooKeeper = zooKeeper;
