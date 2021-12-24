@@ -34,7 +34,7 @@ public class ServerStorage implements Watcher {
     @Override
     public void process(WatchedEvent watchedEvent) {
         try {
-            zooKeeper.getData()
+            zooKeeper.getData(way, this, null);
         }
     }
 }
