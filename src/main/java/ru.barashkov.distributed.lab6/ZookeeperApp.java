@@ -5,6 +5,7 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.stream.ActorMaterializer;
+import org.apache.zookeeper.ZooKeeper;
 
 public class ZookeeperApp {
     public static void main(String[] args) {
@@ -13,6 +14,6 @@ public class ZookeeperApp {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
         final Http http = Http.get(system);
-        Zook
+        ZooKeeper zk = 
     }
 }
