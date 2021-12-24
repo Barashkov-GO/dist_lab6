@@ -10,7 +10,7 @@ public class ZooWatcher implements Watcher {
     public void process(WatchedEvent watchedEvent) {
         try {
             zooKeeper.getChildren(SERVERS_PATH, this);
-            sendSer
+            sendAnswer();
         }
     }
 }
