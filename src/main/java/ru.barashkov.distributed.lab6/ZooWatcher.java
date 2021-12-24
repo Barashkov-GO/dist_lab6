@@ -27,5 +27,6 @@ public class ZooWatcher implements Watcher {
         for (String s : zooKeeper.getChildren(SERVERS_PATH, this)) {
             servers.add(new String(zooKeeper.getData(SERVERS_PATH + "/" + s, false, null)));
         }
+        
     }
 }
