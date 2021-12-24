@@ -9,11 +9,12 @@ public class ServerStorage {
     private ActorRef actorStorage;
     private ZooKeeper zooKeeper;
     private String way;
+    private static final String URL = "localhost:";
 
-    public ServerStorage(Http http, ActorRef actorStorage, ZooKeeper zooKeeper, String way) {
+    public ServerStorage(Http http, ActorRef actorStorage, ZooKeeper zooKeeper, String port) {
         this.http = http;
         this.actorStorage = actorStorage;
         this.zooKeeper = zooKeeper;
-        this.way = way;
+        this.way = URL + port;
     }
 }
