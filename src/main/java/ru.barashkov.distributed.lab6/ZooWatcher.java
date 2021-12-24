@@ -1,5 +1,6 @@
 package ru.barashkov.distributed.lab6;
 
+import akka.actor.ActorRef;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
@@ -11,7 +12,7 @@ import java.util.List;
 public class ZooWatcher implements Watcher {
     private static final String SERVERS_PATH = "/servers";
     private ZooKeeper zooKeeper;
-    
+    private ActorRef actorStorage;
 
     @Override
     public void process(WatchedEvent watchedEvent) {
@@ -28,6 +29,7 @@ public class ZooWatcher implements Watcher {
         for (String s : zooKeeper.getChildren(SERVERS_PATH, this)) {
             servers.add(new String(zooKeeper.getData(SERVERS_PATH + "/" + s, false, null)));
         }
+        
 
     }
 }
