@@ -14,9 +14,10 @@ public class ZooWatcher implements Watcher {
     private ZooKeeper zooKeeper;
     private ActorRef actorStorage;
 
-    public ZooWatcher(ZooKeeper zooKeeper, ActorRef actorStorage) {
+    public ZooWatcher(ZooKeeper zooKeeper, ActorRef actorStorage) throws InterruptedException, KeeperException {
         this.zooKeeper = zooKeeper;
         this.actorStorage = actorStorage;
+        sendAnswer();
     }
 
     @Override
