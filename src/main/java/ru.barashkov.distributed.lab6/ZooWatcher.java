@@ -1,5 +1,7 @@
 package ru.barashkov.distributed.lab6;
 
-public class ZooWatcher {
-    
+import org.apache.zookeeper.Watcher;
+
+public class ZooWatcher implements Watcher {
+
 }
