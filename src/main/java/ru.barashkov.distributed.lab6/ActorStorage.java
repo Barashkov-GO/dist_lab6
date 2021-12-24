@@ -7,7 +7,10 @@ public class StorageActor extends AbstractActor {
     private final Random random = new Random();
 
     private String getRandomServer() {
-        
+        ZookeeperApp.print(String.valueOf(servers));
+        return this.servers.get(
+                random.nextInt(servers.size())
+        );
     }
 
 }
