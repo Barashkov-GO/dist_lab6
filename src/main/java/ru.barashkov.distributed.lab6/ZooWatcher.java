@@ -22,6 +22,6 @@ public class ZooWatcher implements Watcher {
 
     private void sendAnswer() {
         List<String> servers = new ArrayList<>();
-        for (String s : )
+        for (String s : zooKeeper.getChildren)
     }
 }
