@@ -32,7 +32,7 @@ public class ZookeeperApp {
         try {
             zk = new ZooKeeper(args[0], 3000, null);
             new ZooWatcher(zk, actorStorage);
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException | KeeperException e) {
             e.printStackTrace();
             System.exit(-1);
         }
