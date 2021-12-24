@@ -21,7 +21,7 @@ public class ZookeeperApp {
 
         try {
             zk = new ZooKeeper(args[0], 3000, null);
-            new ZooWa
+            new ZooWatcher
         } catch (IOException e) {
             e.printStackTrace();
         }
