@@ -23,7 +23,7 @@ public class ZooWatcher implements Watcher {
     private void sendAnswer() {
         List<String> servers = new ArrayList<>();
         for (String s : zooKeeper.getChildren(SERVERS_PATH, this)) {
-            servers.add()
+            servers.add(new String(zoo.getData(SERVERS_PATH + "/" + s, false, null)));
         }
     }
 }
