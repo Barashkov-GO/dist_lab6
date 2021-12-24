@@ -4,6 +4,8 @@ import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 
+import java.util.List;
+
 public class ZooWatcher implements Watcher {
     private static final String SERVERS_PATH = "/servers";
 
@@ -18,6 +20,6 @@ public class ZooWatcher implements Watcher {
     }
 
     private void sendAnswer() {
-        
+        List<String> servers = new List<>;
     }
 }
