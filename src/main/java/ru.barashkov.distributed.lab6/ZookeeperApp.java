@@ -57,7 +57,7 @@ public class ZookeeperApp {
         }
 
         if (bindings.size() == 0) {
-            System.err
+            System.err.println("No servers online\n");
         }
     }
 }
