@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ZooWatcher implements Watcher {
     private static final String SERVERS_PATH = "/servers";
+    
 
     @Override
     public void process(WatchedEvent watchedEvent) {
@@ -23,7 +24,7 @@ public class ZooWatcher implements Watcher {
     private void sendAnswer() {
         List<String> servers = new ArrayList<>();
         for (String s : zooKeeper.getChildren(SERVERS_PATH, this)) {
-            servers.add(new String(zoo.getData(SERVERS_PATH + "/" + s, false, null)));
+            servers.add(new String(zooKeeper.getData(SERVERS_PATH + "/" + s, false, null)));
         }
     }
 }
