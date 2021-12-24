@@ -30,7 +30,7 @@ public class ZooWatcher implements Watcher {
             servers.add(new String(zooKeeper.getData(SERVERS_PATH + "/" + s, false, null)));
         }
         actorStorage.tell(
-                new MessageSet
+                new MessageGetList
         )
 
     }
