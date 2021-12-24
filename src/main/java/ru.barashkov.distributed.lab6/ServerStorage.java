@@ -6,5 +6,7 @@ import org.apache.zookeeper.ZooKeeper;
 
 public class ServerStorage {
 
-    public ServerStorage(Http http, ActorRef actorStorage, ZooKeeper zooKeeper, )
+    public ServerStorage(Http http, ActorRef actorStorage, ZooKeeper zooKeeper, String way) {
+        
+    }
 }
