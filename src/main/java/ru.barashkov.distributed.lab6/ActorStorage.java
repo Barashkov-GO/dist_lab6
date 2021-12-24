@@ -16,7 +16,8 @@ public class StorageActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return receiveBuilder().
-                match(MessageGetRandom.class,
+                match(
+                        MessageGetRandom.class,
                         )
     }
 
