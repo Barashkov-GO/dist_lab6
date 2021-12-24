@@ -5,10 +5,14 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.http.javadsl.Http;
+import akka.http.javadsl.ServerBinding;
 import akka.stream.ActorMaterializer;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletionStage;
 
 public class ZookeeperApp {
     public static void main(String[] args) {
@@ -26,5 +30,7 @@ public class ZookeeperApp {
             e.printStackTrace();
             System.exit(-1);
         }
+
+        List<CompletionStage<ServerBinding>> bindings = new ArrayList<>();
     }
 }
