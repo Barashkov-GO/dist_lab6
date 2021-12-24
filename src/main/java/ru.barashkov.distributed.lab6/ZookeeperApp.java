@@ -35,7 +35,7 @@ public class ZookeeperApp {
 
 
         for (int i = 1; i < args.length; i++) {
-            
+            ServerStorage server = new ServerStorage(http, storage, zk, args[i]);
         }
     }
 }
