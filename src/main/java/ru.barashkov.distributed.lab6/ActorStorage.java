@@ -18,7 +18,7 @@ public class StorageActor extends AbstractActor {
         return receiveBuilder().
                 match(
                         MessageGetRandom.class,
-                        )
+                        message -> )
     }
 
 }
