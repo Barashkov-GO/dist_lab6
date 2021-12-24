@@ -1,6 +1,10 @@
+package ru.barashkov.distributed.lab6;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
