@@ -13,15 +13,18 @@ public class ServerStorage {
     private ZooKeeper zooKeeper;
     private String way;
     private static final String URL = "localhost:";
+    private static final String SERVERS = "/servers/";
 
     public ServerStorage(Http http, ActorRef actorStorage, ZooKeeper zooKeeper, String port) throws InterruptedException, KeeperException {
         this.http = http;
         this.actorStorage = actorStorage;
         this.zooKeeper = zooKeeper;
         this.way = URL + port;
-        zooKeeper.create("/servers/" + way,
+        zooKeeper.create(
+                SERVERS + way,
                 way.getBytes(),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE,
-                CreateMode.EPHEMERAL_SEQUENTIAL);
+                CreateMode.EPHEMERAL_SEQUENTIAL
+        );
     }
 }
