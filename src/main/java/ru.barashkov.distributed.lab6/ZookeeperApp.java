@@ -60,5 +60,11 @@ public class ZookeeperApp {
             System.err.println("No servers online\n");
         }
         System.out.println(serversInfo);
+
+        for (CompletionStage<ServerBinding> binding : bindings) {
+            binding
+                    .thenCompose(ServerBinding::unbind)
+                    .thenAccept(unbound -> system.terminate());
+        }
     }
 }
