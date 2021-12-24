@@ -14,8 +14,9 @@ public class ZooWatcher implements Watcher {
     private ZooKeeper zooKeeper;
     private ActorRef actorStorage;
 
-    public ZooWatcher(ZooKeeper zooKeeper, ActorRef actorRef) {
-        
+    public ZooWatcher(ZooKeeper zooKeeper, ActorRef actorStorage) {
+        this.zooKeeper = zooKeeper;
+        this.actorStorage = actorStorage;
     }
 
     @Override
