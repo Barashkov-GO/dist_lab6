@@ -5,7 +5,7 @@ import java.util.List;
 public class MessageGetList {
     private final List<String> servers;
 
-    public MessageGetList() {
-        
+    public MessageGetList(List<String> servers) {
+        this.servers = servers;
     }
 }
