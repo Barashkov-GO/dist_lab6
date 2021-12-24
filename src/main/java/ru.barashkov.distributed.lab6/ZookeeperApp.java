@@ -41,14 +41,16 @@ public class ZookeeperApp {
 
 
         for (int i = 1; i < args.length; i++) {
-            ServerStorage server = new ServerStorage(http, actorStorage, zk, args[i]);
-            final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = server.createRoute().flow(system, materializer);
-            bindings.add(http.bindAndHandle(
-                    routeFlow,
-                    ConnectHttp.toHost("", Integer.parseInt(args[i])),
-                    materializer
-            ));
-            serversInfo.append("http://localhost:").append(args[i]).append("/\n");
+            try {
+                ServerStorage server = new ServerStorage(http, actorStorage, zk, args[i]);
+                final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = server.createRoute().flow(system, materializer);
+                bindings.add(http.bindAndHandle(
+                        routeFlow,
+                        ConnectHttp.toHost("", Integer.parseInt(args[i])),
+                        materializer
+                ));
+                serversInfo.append("http://localhost:").append(args[i]).append("/\n");
+            } catch
         }
     }
 }
