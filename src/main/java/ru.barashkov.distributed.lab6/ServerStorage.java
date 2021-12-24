@@ -2,6 +2,7 @@ package ru.barashkov.distributed.lab6;
 
 import akka.actor.ActorRef;
 import akka.http.javadsl.Http;
+import akka.http.javadsl.server.Route;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooDefs;
@@ -26,5 +27,10 @@ public class ServerStorage {
                 ZooDefs.Ids.OPEN_ACL_UNSAFE,
                 CreateMode.EPHEMERAL_SEQUENTIAL
         );
+    }
+
+    public Route createRoute() {
+        
+
     }
 }
