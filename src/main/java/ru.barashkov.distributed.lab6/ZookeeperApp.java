@@ -17,6 +17,8 @@ public class ZookeeperApp {
         final Http http = Http.get(system);
         ZooKeeper zk = null;
 
-        try 
+        try {
+            zk = 
+        }
     }
 }
