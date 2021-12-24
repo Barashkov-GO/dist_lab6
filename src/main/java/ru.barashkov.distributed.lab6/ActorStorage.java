@@ -23,7 +23,8 @@ public class StorageActor extends AbstractActor {
                         )
                 ).
                 match(
-                        Message
+                        MessageGetList.class,
+                        
                 )
     }
 
