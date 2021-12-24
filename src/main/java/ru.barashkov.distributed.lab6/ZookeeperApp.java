@@ -32,5 +32,6 @@ public class ZookeeperApp {
         }
 
         List<CompletionStage<ServerBinding>> bindings = new ArrayList<>();
+        
     }
 }
