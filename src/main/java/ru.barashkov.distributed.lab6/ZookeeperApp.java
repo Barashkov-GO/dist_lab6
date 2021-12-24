@@ -48,7 +48,7 @@ public class ZookeeperApp {
                     ConnectHttp.toHost("", Integer.parseInt(args[i])),
                     materializer
             ));
-            serversInfo += "http://localhost:" + ;
+            serversInfo += "http://localhost:" + args[i];
         }
     }
 }
