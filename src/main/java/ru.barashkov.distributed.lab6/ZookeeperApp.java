@@ -18,7 +18,7 @@ public class ZookeeperApp {
         ZooKeeper zk = null;
 
         try {
-            zk = 
+            zk = new ZooKeeper()
         }
     }
 }
