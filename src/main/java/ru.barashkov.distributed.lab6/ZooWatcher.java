@@ -11,6 +11,7 @@ import java.util.List;
 public class ZooWatcher implements Watcher {
     private static final String SERVERS_PATH = "/servers";
     private ZooKeeper zooKeeper;
+    
 
     @Override
     public void process(WatchedEvent watchedEvent) {
@@ -27,6 +28,6 @@ public class ZooWatcher implements Watcher {
         for (String s : zooKeeper.getChildren(SERVERS_PATH, this)) {
             servers.add(new String(zooKeeper.getData(SERVERS_PATH + "/" + s, false, null)));
         }
-        
+
     }
 }
