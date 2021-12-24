@@ -26,7 +26,7 @@ public class StorageActor extends AbstractActor {
                         MessageGetList.class,
                         message -> servers = message.getServers()
                 ).
-                build()
+                build();
     }
 
 }
