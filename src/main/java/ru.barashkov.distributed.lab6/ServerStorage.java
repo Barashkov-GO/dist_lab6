@@ -35,6 +35,10 @@ public class ServerStorage implements Watcher {
     public void process(WatchedEvent watchedEvent) {
         try {
             zooKeeper.getData(way, this, null);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (KeeperException e) {
+            e.printStackTrace();
         }
     }
 }
