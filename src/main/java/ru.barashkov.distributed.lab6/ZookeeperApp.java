@@ -56,6 +56,6 @@ public class ZookeeperApp {
             }
         }
 
-        if 
+        if (binding)
     }
 }
