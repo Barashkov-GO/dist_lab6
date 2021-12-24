@@ -8,4 +8,8 @@ public class MessageGetList {
     public MessageGetList(List<String> servers) {
         this.servers = servers;
     }
+
+    public List<String> getServers() {
+        return this.servers;
+    }
 }

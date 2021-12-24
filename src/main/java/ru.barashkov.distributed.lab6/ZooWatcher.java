@@ -14,6 +14,10 @@ public class ZooWatcher implements Watcher {
     private ZooKeeper zooKeeper;
     private ActorRef actorStorage;
 
+    public ZooWatcher(ZooKeeper zooKeeper, ActorRef actorRef) {
+        
+    }
+
     @Override
     public void process(WatchedEvent watchedEvent) {
         try {
