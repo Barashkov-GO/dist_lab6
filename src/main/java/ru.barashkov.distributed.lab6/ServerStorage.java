@@ -3,12 +3,9 @@ package ru.barashkov.distributed.lab6;
 import akka.actor.ActorRef;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.server.Route;
-import org.apache.zookeeper.CreateMode;
-import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.ZooDefs;
-import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.*;
 
-public class ServerStorage {
+public class ServerStorage implements Watcher {
     private Http http;
     private ActorRef actorStorage;
     private ZooKeeper zooKeeper;
@@ -33,5 +30,9 @@ public class ServerStorage {
 
 
     }
-    
+
+    @Override
+    public void process(WatchedEvent watchedEvent) {
+
+    }
 }
