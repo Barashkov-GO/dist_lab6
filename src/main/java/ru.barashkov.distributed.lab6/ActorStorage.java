@@ -26,7 +26,7 @@ public class ActorStorage extends AbstractActor {
                 match(
                         MessageGetRandom.class,
                         message -> sender().tell(getRandomServer(),
-                                ActorRef.noSender()
+                                ActorRef.noSender() 
                         )
                 ).
                 match(
