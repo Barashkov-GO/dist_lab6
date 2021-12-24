@@ -14,7 +14,7 @@ public class ActorStorage extends AbstractActor {
     private final Random random = new Random();
 
     private String getRandomServer() {
-        ZookeeperApp.print(String.valueOf(servers));
+        System.out.println(String.valueOf(servers));
         return this.servers.get(
                 random.nextInt(servers.size())
         );
