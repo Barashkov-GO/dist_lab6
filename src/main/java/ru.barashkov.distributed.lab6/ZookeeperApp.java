@@ -37,7 +37,7 @@ public class ZookeeperApp {
         }
 
         List<CompletionStage<ServerBinding>> bindings = new ArrayList<>();
-        String serversInfo = 
+        String serversInfo = "";
 
 
         for (int i = 1; i < args.length; i++) {
