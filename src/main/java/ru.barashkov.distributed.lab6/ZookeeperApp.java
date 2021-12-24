@@ -5,6 +5,7 @@ import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
+import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
 import akka.http.javadsl.model.HttpRequest;
@@ -41,6 +42,11 @@ public class ZookeeperApp {
         for (int i = 1; i < args.length; i++) {
             ServerStorage server = new ServerStorage(http, actorStorage, zk, args[i]);
             final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = server.createRoute().flow(system, materializer);
+            bindings.add(http.bindAndHandle(
+                    routeFlow,
+                    ConnectHttp.toHost("", Integer.parseInt(args[i])),
+                    materializer
+            ));
         }
     }
 }
