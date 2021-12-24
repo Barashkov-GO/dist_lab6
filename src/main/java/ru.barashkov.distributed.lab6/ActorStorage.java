@@ -21,6 +21,9 @@ public class StorageActor extends AbstractActor {
                         message -> sender().tell(getRandomServer(),
                                 ActorRef.noSender()
                         )
+                ).
+                match(
+                        Message
                 )
     }
 
