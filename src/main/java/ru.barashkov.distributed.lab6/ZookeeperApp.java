@@ -56,6 +56,8 @@ public class ZookeeperApp {
             }
         }
 
-        if (bindings.size() == 0)
+        if (bindings.size() == 0) {
+            System.err
+        }
     }
 }
