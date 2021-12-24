@@ -8,6 +8,8 @@ import akka.http.javadsl.Http;
 import akka.stream.ActorMaterializer;
 import org.apache.zookeeper.ZooKeeper;
 
+import java.io.IOException;
+
 public class ZookeeperApp {
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("routes");
@@ -19,6 +21,8 @@ public class ZookeeperApp {
 
         try {
             zk = new ZooKeeper(args[0], 3000, null);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
