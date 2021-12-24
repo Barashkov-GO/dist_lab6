@@ -19,7 +19,9 @@ public class StorageActor extends AbstractActor {
                 match(
                         MessageGetRandom.class,
                         message -> sender().tell(getRandomServer(),
-                                ActorRef.noSender()))
+                                ActorRef.noSender()
+                        )
+                )
     }
 
 }
