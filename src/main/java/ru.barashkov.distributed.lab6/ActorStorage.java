@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
 
-public class StorageActor extends AbstractActor {
+public class ActorStorage extends AbstractActor {
     private List<String> servers = new ArrayList<>();
     private final Random random = new Random();
 
