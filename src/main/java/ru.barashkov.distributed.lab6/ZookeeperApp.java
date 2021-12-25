@@ -65,7 +65,7 @@ public class ZookeeperApp {
         }
 
         if (bindings.size() == 0) {
-            System.err.println();
+            System.err.println(SERVERS_INFO_ERROR);
         }
         System.out.println(serversInfo);
 
