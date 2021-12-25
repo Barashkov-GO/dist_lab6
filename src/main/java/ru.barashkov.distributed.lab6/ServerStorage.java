@@ -6,12 +6,14 @@ import akka.http.javadsl.server.Route;
 import org.apache.zookeeper.*;
 
 public class ServerStorage implements Watcher {
+    private static final String URL = "localhost:";
+    private static final String SERVERS = "/servers/";
+    private static final String PATH = "";
+
     private final Http http;
     private final ActorRef actorStorage;
     private final ZooKeeper zooKeeper;
     private final String way;
-    private static final String URL = "localhost:";
-    private static final String SERVERS = "/servers/";
 
     public ServerStorage(Http http, ActorRef actorStorage, ZooKeeper zooKeeper, String port) throws InterruptedException, KeeperException {
         this.http = http;
@@ -29,11 +31,11 @@ public class ServerStorage implements Watcher {
     public Route createRoute() {
         return route(
                 path(
-                        way, () -> route(
+                        PATH, () -> route(
                                 get(() ->
                                         parameter("url", (url) ->
                                                 parameter("count", (count) -> {
-                                                    
+                                                            
                                                         }
                                                 )
                                         )
