@@ -51,7 +51,10 @@ public class ServerStorage implements Watcher {
                                                                             new MessageGetRandom(),
                                                                             TIMEOUT
                                                                     ).
-                                                                    thenCompose()
+                                                                    thenCompose(
+                                                                            res ->
+                                                                                    
+                                                                            )
                                                             )
                                                         }
                                                 )
