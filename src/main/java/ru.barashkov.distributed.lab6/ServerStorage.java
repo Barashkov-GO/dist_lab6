@@ -50,7 +50,8 @@ public class ServerStorage implements Watcher {
                                                                             actorStorage,
                                                                             new MessageGetRandom(),
                                                                             TIMEOUT
-                                                                    )
+                                                                    ).
+                                                                    thenCompose
                                                             )
                                                         }
                                                 )
