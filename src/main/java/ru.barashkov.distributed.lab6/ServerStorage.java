@@ -36,7 +36,7 @@ public class ServerStorage implements Watcher {
                                         parameter("url", (url) ->
                                                 parameter("count", (count) -> {
                                                             if (count.equals("0")){
-                                                                return com
+                                                                return completeWithFuture
                                                             }
                                                         }
                                                 )
