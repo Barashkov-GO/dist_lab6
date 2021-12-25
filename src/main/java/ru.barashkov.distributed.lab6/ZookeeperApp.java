@@ -27,7 +27,7 @@ public class ZookeeperApp {
     private static final String HOST_IP = "localhost";
     private static final String SERVERS_INFO_ERROR = "No servers online\n";
     private static final int ZOOKEEPER_TIMEOUT = 3000;
-    private static final 
+    private static final int ZOOKEEPER_ADDRESS_ID = 0;
 
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("routes");
@@ -38,7 +38,7 @@ public class ZookeeperApp {
         ZooKeeper zk = null;
 
         try {
-            zk = new ZooKeeper(args[0], ZOOKEEPER_TIMEOUT, null);
+            zk = new ZooKeeper(args[ZOOKEEPER_ADDRESS_ID], ZOOKEEPER_TIMEOUT, null);
             new ZooWatcher(zk, actorStorage);
         } catch (IOException | InterruptedException | KeeperException e) {
             e.printStackTrace();
