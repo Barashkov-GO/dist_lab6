@@ -53,7 +53,9 @@ public class ServerStorage implements Watcher {
                                                                     ).
                                                                     thenCompose(
                                                                             res ->
-                                                                                    http.singleRequest(HttpRequest.create())
+                                                                                    http.singleRequest(HttpRequest.create(
+                                                                                            String.
+                                                                                    ))
                                                                             )
                                                             )
                                                         }
