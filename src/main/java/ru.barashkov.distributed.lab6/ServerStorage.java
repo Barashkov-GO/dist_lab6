@@ -29,7 +29,9 @@ public class ServerStorage implements Watcher {
     public Route createRoute() {
         return route(
                 path(
-                        way, () -> route
+                        way, () -> route(
+                                get()
+                        )
                 )
 
         )
