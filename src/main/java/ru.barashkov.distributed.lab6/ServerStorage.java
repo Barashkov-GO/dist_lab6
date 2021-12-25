@@ -2,6 +2,7 @@ package ru.barashkov.distributed.lab6;
 
 import akka.actor.ActorRef;
 import akka.http.javadsl.Http;
+import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.server.Route;
 import org.apache.zookeeper.*;
 
@@ -37,7 +38,7 @@ public class ServerStorage implements Watcher {
                                                 parameter("count", (count) -> {
                                                             if (count.equals("0")){
                                                                 return completeWithFuture(
-                                                                        http.singleRequest()
+                                                                        http.singleRequest(HttpRequest.create())
                                                                 )
                                                             }
                                                         }
