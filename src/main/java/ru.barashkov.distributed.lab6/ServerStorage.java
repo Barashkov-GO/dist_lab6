@@ -30,7 +30,8 @@ public class ServerStorage implements Watcher {
         return route(
                 path(
                         way, () -> route(
-                                get(())
+                                get(() ->
+                                        )
                         )
                 )
 
