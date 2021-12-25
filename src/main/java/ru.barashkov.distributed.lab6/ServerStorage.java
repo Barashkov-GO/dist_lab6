@@ -12,8 +12,9 @@ import java.time.Duration;
 public class ServerStorage implements Watcher {
     private static final String URL = "localhost:";
     private static final String SERVERS = "/servers/";
-    private static final Duration   TIMEOUT = Duration.ofMillis(5000);
+    private static final Duration TIMEOUT = Duration.ofMillis(5000);
     private static final String PATH = "";
+    private static final String URL_TO_COMPLETE = "http://%s/?url=%s&count=%d";
 
     private final Http http;
     private final ActorRef actorStorage;
@@ -54,7 +55,7 @@ public class ServerStorage implements Watcher {
                                                                     thenCompose(
                                                                             res ->
                                                                                     http.singleRequest(HttpRequest.create(
-                                                                                            String.format()
+                                                                                            String.format(URL_TO_COMPLETE)
                                                                                     ))
                                                                             )
                                                             )
