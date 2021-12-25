@@ -35,7 +35,7 @@ public class ServerStorage implements Watcher {
                                 get(() ->
                                         parameter("url", (url) ->
                                                 parameter("count", (count) -> {
-                                                            if (count.equals())
+                                                            if (count.equals("0"))
                                                         }
                                                 )
                                         )
