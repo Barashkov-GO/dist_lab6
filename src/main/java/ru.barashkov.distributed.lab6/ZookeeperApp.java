@@ -24,7 +24,11 @@ public class ZookeeperApp {
     private static final String SERVERS_INFO_1 = "Servers:\n";
     private static final String SERVERS_INFO_2 = "http://localhost:";
     private static final String SERVERS_INFO_NEWLINE = "/\n";
+    private static final String HOST_IP = "localhost";
     private static final String SERVERS_INFO_ERROR = "No servers online\n";
+    private static final int ZOOKEEPER_TIMEOUT = 3000;
+    private static final 
+
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("routes");
         ActorRef actorStorage = system.actorOf(Props.create(ActorStorage.class));
@@ -34,7 +38,7 @@ public class ZookeeperApp {
         ZooKeeper zk = null;
 
         try {
-            zk = new ZooKeeper(args[0], 3000, null);
+            zk = new ZooKeeper(args[0], ZOOKEEPER_TIMEOUT, null);
             new ZooWatcher(zk, actorStorage);
         } catch (IOException | InterruptedException | KeeperException e) {
             e.printStackTrace();
@@ -51,7 +55,7 @@ public class ZookeeperApp {
                 final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = server.createRoute().flow(system, materializer);
                 bindings.add(http.bindAndHandle(
                         routeFlow,
-                        ConnectHttp.toHost("", Integer.parseInt(args[i])),
+                        ConnectHttp.toHost(HOST_IP, Integer.parseInt(args[i])),
                         materializer
                 ));
                 serversInfo.append(SERVERS_INFO_2).append(args[i]).append(SERVERS_INFO_NEWLINE);
