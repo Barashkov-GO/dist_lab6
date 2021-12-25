@@ -58,6 +58,7 @@ public class ServerStorage implements Watcher {
                                                                                             String.format(
                                                                                                     URL_TO_COMPLETE,
                                                                                                     res,
+                                                                                                    url,
                                                                                                     )
                                                                                     ))
                                                                             )
