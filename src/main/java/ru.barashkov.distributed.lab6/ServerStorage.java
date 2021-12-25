@@ -41,7 +41,9 @@ public class ServerStorage implements Watcher {
                                                                         http.singleRequest(HttpRequest.create(url))
                                                                 );
                                                             }
-                                                            
+                                                            return completeWithFuture(
+                                                                    
+                                                            )
                                                         }
                                                 )
                                         )
