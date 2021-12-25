@@ -22,7 +22,12 @@ public class ServerStorage implements Watcher {
     private final String way;
 
 
-    public ServerStorage(Http http, ActorRef actorStorage, ZooKeeper zooKeeper, String port) throws InterruptedException, KeeperException {
+    public ServerStorage(
+                         Http http,
+                         ActorRef actorStorage,
+                         ZooKeeper zooKeeper,
+                         String port
+    ) throws InterruptedException, KeeperException {
         this.http = http;
         this.actorStorage = actorStorage;
         this.zooKeeper = zooKeeper;
