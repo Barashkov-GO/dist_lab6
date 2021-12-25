@@ -38,7 +38,7 @@ public class ServerStorage implements Watcher {
         return route(
                 path(
                         PATH, () ->
-                                route(
+                            route(
                                 get(
                                     () ->
                                         parameter("url", (url) ->
@@ -70,7 +70,7 @@ public class ServerStorage implements Watcher {
                                                 )
                                         )
                                 )
-                                )
+                            )
                 )
         );
     }
