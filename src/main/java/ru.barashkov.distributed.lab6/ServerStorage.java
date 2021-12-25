@@ -32,7 +32,7 @@ public class ServerStorage implements Watcher {
                         way, () -> route(
                                 get(() ->
                                         parameter("url", (url) ->
-                                                )
+                                                parameter)
                                 )
                         )
                 )
