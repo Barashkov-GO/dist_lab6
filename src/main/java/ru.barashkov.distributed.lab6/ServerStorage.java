@@ -37,8 +37,10 @@ public class ServerStorage implements Watcher {
     public Route createRoute() {
         return route(
                 path(
-                        PATH, () -> route(
-                                get(() ->
+                        PATH, () ->
+                                route(
+                                get(
+                                    () ->
                                         parameter("url", (url) ->
                                                 parameter("count", (count) -> {
                                                             if (count.equals("0")){
@@ -68,7 +70,7 @@ public class ServerStorage implements Watcher {
                                                 )
                                         )
                                 )
-                        )
+                                )
                 )
         );
     }
