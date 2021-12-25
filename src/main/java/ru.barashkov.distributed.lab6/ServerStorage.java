@@ -57,6 +57,7 @@ public class ServerStorage implements Watcher {
                                                                                     http.singleRequest(HttpRequest.create(
                                                                                             String.format(
                                                                                                     URL_TO_COMPLETE,
+                                                                                                    res,
                                                                                                     )
                                                                                     ))
                                                                             )
