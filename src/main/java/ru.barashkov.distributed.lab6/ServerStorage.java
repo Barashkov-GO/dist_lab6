@@ -39,7 +39,8 @@ public class ServerStorage implements Watcher {
                                                             if (count.equals("0")){
                                                                 return completeWithFuture(
                                                                         http.singleRequest(HttpRequest.create(url))
-                                                                )
+                                                                );
+                                                                
                                                             }
                                                         }
                                                 )
