@@ -44,7 +44,9 @@ public class ServerStorage implements Watcher {
                                                             }
                                                             return completeWithFuture(
                                                                     Patterns.ask(
-                                                                            
+                                                                            actorStorage,
+                                                                            new MessageGetRandom(),
+                                                                            TIM
                                                                     )
                                                             )
                                                         }
