@@ -21,6 +21,10 @@ import java.util.List;
 import java.util.concurrent.CompletionStage;
 
 public class ZookeeperApp {
+    private static final String SERVERS_INFO_1 = "Servers:\n";
+    private static final String SERVERS_INFO_2 = "http://localhost:";
+    private static final String SERVERS_INFO_NEWLINE = "/\n";
+    private static final String SERVERS_INFO_ERROR = "No servers online\n";
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("routes");
         ActorRef actorStorage = system.actorOf(Props.create(ActorStorage.class));
@@ -38,7 +42,7 @@ public class ZookeeperApp {
         }
 
         List<CompletionStage<ServerBinding>> bindings = new ArrayList<>();
-        StringBuilder serversInfo = new StringBuilder("Servers:\n");
+        StringBuilder serversInfo = new StringBuilder(SERVERS_INFO_1);
 
 
         for (int i = 1; i < args.length; i++) {
@@ -50,14 +54,14 @@ public class ZookeeperApp {
                         ConnectHttp.toHost("", Integer.parseInt(args[i])),
                         materializer
                 ));
-                serversInfo.append("http://localhost:").append(args[i]).append("/\n");
+                serversInfo.append(SERVERS_INFO_2).append(args[i]).append(SERVERS_INFO_NEWLINE);
             } catch (InterruptedException | KeeperException e) {
                 e.printStackTrace();
             }
         }
 
         if (bindings.size() == 0) {
-            System.err.println("No servers online\n");
+            System.err.println();
         }
         System.out.println(serversInfo);
 
