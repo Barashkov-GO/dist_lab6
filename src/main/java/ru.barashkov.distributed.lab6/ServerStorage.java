@@ -7,9 +7,12 @@ import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
 import org.apache.zookeeper.*;
 
+import java.time.Duration;
+
 public class ServerStorage implements Watcher {
     private static final String URL = "localhost:";
     private static final String SERVERS = "/servers/";
+    private static final Duration   TIMEOUT = Duration.ofMillis(5000);
     private static final String PATH = "";
 
     private final Http http;
@@ -46,7 +49,7 @@ public class ServerStorage implements Watcher {
                                                                     Patterns.ask(
                                                                             actorStorage,
                                                                             new MessageGetRandom(),
-                                                                            TIM
+                                                                            TIMEOUT
                                                                     )
                                                             )
                                                         }
