@@ -59,9 +59,10 @@ public class ServerStorage implements Watcher {
                                                                                                     URL_TO_COMPLETE,
                                                                                                     res,
                                                                                                     url,
-                                                                                                    Integer.parseInt(count) - 1)
+                                                                                                    Integer.parseInt(count) - 1
+                                                                                            )
                                                                                     ))
-                                                                            )
+                                                                    )
                                                             )
                                                         }
                                                 )
