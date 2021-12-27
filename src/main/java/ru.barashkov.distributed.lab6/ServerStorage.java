@@ -43,7 +43,7 @@ public class ServerStorage implements Watcher {
                 SERVERS + path,
                 path.getBytes(),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE,
-                CreateMode.EPHEMERAL_SEQUENTIAL
+                CreateMode.EPHEMERAL
         );
     }
 
