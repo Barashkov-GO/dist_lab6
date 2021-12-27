@@ -1,6 +1,5 @@
 package ru.barashkov.distributed.lab6;
 
-
 import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -16,18 +15,18 @@ import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CompletionStage;
 
 public class ZookeeperApp {
-    private static final String SERVERS_INFO_1 = "Servers:\n";
-    private static final String SERVERS_INFO_2 = "http://localhost:";
+    private static final String SERVERS_INFO_STR_1 = "Servers:\n";
+    private static final String SERVERS_INFO_STR_2 = "localhost";
     private static final String SERVERS_INFO_NEWLINE = "/\n";
-    private static final String HOST_IP = "localhost";
     private static final String SERVERS_INFO_ERROR = "No servers online\n";
-    private static final int ZOOKEEPER_TIMEOUT = 3000;
+    private static final String HOST_IP = "localhost";
+
     private static final int ZOOKEEPER_ADDRESS_ID = 0;
+    private static final int ZOOKEEPER_PORT_ID = 1;
+    private static final int ZOOKEEPER_TIMEOUT = 3000;
 
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("routes");
@@ -35,44 +34,47 @@ public class ZookeeperApp {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
         final Http http = Http.get(system);
-        ZooKeeper zk = null;
+        ZooKeeper zooKeeper = null;
 
         try {
-            zk = new ZooKeeper(args[ZOOKEEPER_ADDRESS_ID], ZOOKEEPER_TIMEOUT, null);
-            new ZooWatcher(zk, actorStorage);
+                zooKeeper = new ZooKeeper(args[ZOOKEEPER_ADDRESS_ID], ZOOKEEPER_TIMEOUT, null);
+                new ZooWatcher(zooKeeper, actorStorage);
         } catch (IOException | InterruptedException | KeeperException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
-
-        List<CompletionStage<ServerBinding>> bindings = new ArrayList<>();
-        StringBuilder serversInfo = new StringBuilder(SERVERS_INFO_1);
-
-
-        for (int i = 1; i < args.length; i++) {
-            try {
-                ServerStorage server = new ServerStorage(http, actorStorage, zk, args[i]);
-                final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = server.createRoute().flow(system, materializer);
-                bindings.add(http.bindAndHandle(
-                        routeFlow,
-                        ConnectHttp.toHost(HOST_IP, Integer.parseInt(args[i])),
-                        materializer
-                ));
-                serversInfo.append(SERVERS_INFO_2).append(args[i]).append(SERVERS_INFO_NEWLINE);
-            } catch (InterruptedException | KeeperException e) {
                 e.printStackTrace();
-            }
+                System.exit(-1);
         }
 
-        if (bindings.size() == 0) {
+        CompletionStage<ServerBinding> binding = null;
+        StringBuilder serversInfo = new StringBuilder(SERVERS_INFO_STR_1);
+
+
+        try {
+            ServerStorage server = new ServerStorage(http, actorStorage, zooKeeper, args[ZOOKEEPER_PORT_ID]);
+            final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = server.createRoute().flow(system, materializer);
+            binding = http.bindAndHandle(
+                        routeFlow,
+                        ConnectHttp.toHost(HOST_IP, Integer.parseInt(args[ZOOKEEPER_PORT_ID])),
+                        materializer
+            );
+            serversInfo.append(SERVERS_INFO_STR_2).append(args[ZOOKEEPER_PORT_ID]).append(SERVERS_INFO_NEWLINE);
+            System.out.println("Server is starting at http://" + HOST_IP + ":" + Integer.parseInt(args[1]));
+        } catch (InterruptedException | KeeperException e) {
+            e.printStackTrace();
+        }
+
+        if (binding == null) {
             System.err.println(SERVERS_INFO_ERROR);
-        }
-        System.out.println(serversInfo);
-
-        for (CompletionStage<ServerBinding> binding : bindings) {
-            binding
-                    .thenCompose(ServerBinding::unbind)
-                    .thenAccept(unbound -> system.terminate());
+        } else {
+            try {
+                System.in.read();
+            } catch (IOException e) {
+                binding
+                        .thenCompose(ServerBinding::unbind)
+                        .thenAccept(unbound -> system.terminate());
+                e.printStackTrace();
+                System.out.println(serversInfo);
+                System.exit(-1);
+            }
         }
     }
 }

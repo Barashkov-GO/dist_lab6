@@ -14,9 +14,14 @@ import static akka.http.javadsl.server.Directives.*;
 public class ServerStorage implements Watcher {
     private static final String URL = "localhost:";
     private static final String SERVERS = "/servers/";
-    private static final Duration TIMEOUT = Duration.ofMillis(5000);
+    private static final String URL_PARAM = "url";
+    private static final String COUNT_PARAM = "count";
+    private static final String NUMBER_STR = "Ping number = ";
+    private static final String ON_STR = " on ";
+    private static final String ZERO = "0";
     private static final String PATH = "";
-    private static final String URL_TO_COMPLETE = "http://%s/?url=%s&count=%d";
+    private static final String URL_FORMAT_STR = "http://%s/?url=%s&count=%d";
+    private static final Duration TIMEOUT = Duration.ofMillis(5000);
 
     private final Http http;
     private final ActorRef actorStorage;
@@ -29,7 +34,7 @@ public class ServerStorage implements Watcher {
                          ActorRef actorStorage,
                          ZooKeeper zooKeeper,
                          String port
-    ) throws InterruptedException, KeeperException {
+                        ) throws InterruptedException, KeeperException {
         this.http = http;
         this.actorStorage = actorStorage;
         this.zooKeeper = zooKeeper;
@@ -44,41 +49,40 @@ public class ServerStorage implements Watcher {
 
     public Route createRoute() {
         return route(
-                path(
-                        PATH, () ->
-                            route(
-                                get(
-                                    () ->
-                                        parameter("url", (url) ->
-                                                parameter("count", (count) -> {
-                                                            if (count.equals("0")){
-                                                                return completeWithFuture(
-                                                                        http.singleRequest(HttpRequest.create(url))
-                                                                );
-                                                            }
-                                                            return completeWithFuture(
-                                                                    Patterns.ask(
-                                                                            actorStorage,
-                                                                            new MessageGetRandom(),
-                                                                            TIMEOUT
-                                                                    ).
-                                                                    thenCompose(
-                                                                            res ->
-                                                                                    http.singleRequest(HttpRequest.create(
-                                                                                            String.format(
-                                                                                                    URL_TO_COMPLETE,
-                                                                                                    res,
-                                                                                                    url,
-                                                                                                    Integer.parseInt(count) - 1
-                                                                                            )
-                                                                                    ))
-                                                                    )
-                                                            );
-                                                        }
-                                                )
-                                        )
+                path(PATH, () ->
+                    route(
+                            get(() ->
+                                parameter(URL_PARAM, (url) ->
+                                parameter(COUNT_PARAM, (count) -> {
+                                            System.out.println(NUMBER_STR + count + ON_STR + way);
+                                            if (count.equals(ZERO)){
+                                                return completeWithFuture(
+                                                        http.singleRequest(HttpRequest.create(url))
+                                                );
+                                            }
+                                            return completeWithFuture(
+                                                    Patterns.ask(
+                                                            actorStorage,
+                                                            new MessageGetRandom(),
+                                                            TIMEOUT
+                                                    ).
+                                                    thenCompose(
+                                                            res ->
+                                                                    http.singleRequest(HttpRequest.create(
+                                                                            String.format(
+                                                                                    URL_FORMAT_STR,
+                                                                                    res,
+                                                                                    url,
+                                                                                    Integer.parseInt(count) - 1
+                                                                            )
+                                                                    ))
+                                                    )
+                                            );
+                                }
+                                )
                                 )
                             )
+                    )
                 )
         );
     }

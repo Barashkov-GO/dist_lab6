@@ -6,8 +6,6 @@ import java.util.Random;
 
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
-import akka.actor.Props;
 
 public class ActorStorage extends AbstractActor {
     private List<String> servers = new ArrayList<>();
@@ -15,7 +13,7 @@ public class ActorStorage extends AbstractActor {
 
     private String getRandomServer() {
         System.out.println(String.valueOf(servers));
-        return this.servers.get(
+        return servers.get(
                 random.nextInt(servers.size())
         );
     }
@@ -25,7 +23,8 @@ public class ActorStorage extends AbstractActor {
         return receiveBuilder().
                 match(
                         MessageGetRandom.class,
-                        message -> sender().tell(getRandomServer(),
+                        message -> sender().tell(
+                                getRandomServer(),
                                 ActorRef.noSender()
                         )
                 ).
