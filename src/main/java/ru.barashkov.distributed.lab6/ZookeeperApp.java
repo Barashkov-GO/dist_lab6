@@ -61,23 +61,13 @@ public class ZookeeperApp {
                     append(args[ZOOKEEPER_PORT_ID]).
                     append(SERVERS_INFO_NEWLINE);
             System.out.println("Server is starting at http://" + HOST_IP + ":" + Integer.parseInt(args[1]));
+            System.in.read();
             System.out.println(serversInfo);
             binding
                     .thenCompose(ServerBinding::unbind)
                     .thenAccept(unbound -> system.terminate());
-        } catch (InterruptedException | KeeperException e) {
+        } catch (InterruptedException | KeeperException | IOException e) {
             e.printStackTrace();
-        }
-
-        if (binding == null) {
-            System.err.println(SERVERS_INFO_ERROR);
-        } else {
-            try {
-                System.in.read();
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.exit(-1);
-            }
         }
     }
 }
