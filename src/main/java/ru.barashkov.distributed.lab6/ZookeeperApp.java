@@ -71,11 +71,7 @@ public class ZookeeperApp {
             try {
                 System.in.read();
             } catch (IOException e) {
-                binding
-                        .thenCompose(ServerBinding::unbind)
-                        .thenAccept(unbound -> system.terminate());
                 e.printStackTrace();
-                System.out.println(serversInfo);
                 System.exit(-1);
             }
         }
