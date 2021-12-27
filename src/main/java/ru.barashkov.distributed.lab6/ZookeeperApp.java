@@ -56,13 +56,13 @@ public class ZookeeperApp {
                         ConnectHttp.toHost(HOST_IP, Integer.parseInt(args[ZOOKEEPER_PORT_ID])),
                         materializer
             );
+            System.out.println("Server is starting at http://" + HOST_IP + ":" + Integer.parseInt(args[1]));
+            System.in.read();
+            System.out.println(serversInfo);
             serversInfo.
                     append(SERVERS_INFO_STR_2).
                     append(args[ZOOKEEPER_PORT_ID]).
                     append(SERVERS_INFO_NEWLINE);
-            System.out.println("Server is starting at http://" + HOST_IP + ":" + Integer.parseInt(args[1]));
-            System.in.read();
-            System.out.println(serversInfo);
             binding
                     .thenCompose(ServerBinding::unbind)
                     .thenAccept(unbound -> system.terminate());
