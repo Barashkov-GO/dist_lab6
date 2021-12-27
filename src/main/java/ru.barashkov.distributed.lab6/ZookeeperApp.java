@@ -61,9 +61,6 @@ public class ZookeeperApp {
                     append(args[ZOOKEEPER_PORT_ID]).
                     append(SERVERS_INFO_NEWLINE);
             System.out.println("Server is starting at http://" + HOST_IP + ":" + Integer.parseInt(args[1]));
-            binding
-                    .thenCompose(ServerBinding::unbind)
-                    .thenAccept(unbound -> system.terminate());
         } catch (InterruptedException | KeeperException e) {
             e.printStackTrace();
         }
@@ -74,6 +71,9 @@ public class ZookeeperApp {
             try {
                 System.in.read();
             } catch (IOException e) {
+                binding
+                        .thenCompose(ServerBinding::unbind)
+                        .thenAccept(unbound -> system.terminate());
                 e.printStackTrace();
                 System.exit(-1);
             }
