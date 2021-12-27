@@ -26,7 +26,7 @@ public class ServerStorage implements Watcher {
     private final Http http;
     private final ActorRef actorStorage;
     private final ZooKeeper zooKeeper;
-    private final String way;
+    private final String path;
 
 
     public ServerStorage(
@@ -38,10 +38,10 @@ public class ServerStorage implements Watcher {
         this.http = http;
         this.actorStorage = actorStorage;
         this.zooKeeper = zooKeeper;
-        this.way = URL + port;
+        this.path = URL + port;
         zooKeeper.create(
-                SERVERS + way,
-                way.getBytes(),
+                SERVERS + path,
+                path.getBytes(),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE,
                 CreateMode.EPHEMERAL_SEQUENTIAL
         );
@@ -54,7 +54,7 @@ public class ServerStorage implements Watcher {
                             get(() ->
                                 parameter(URL_PARAM, (url) ->
                                 parameter(COUNT_PARAM, (count) -> {
-                                            System.out.println(NUMBER_STR + count + ON_STR + way);
+                                            System.out.println(NUMBER_STR + count + ON_STR + path);
                                             if (count.equals(ZERO)){
                                                 return completeWithFuture(
                                                         http.singleRequest(HttpRequest.create(url))
@@ -90,7 +90,7 @@ public class ServerStorage implements Watcher {
     @Override
     public void process(WatchedEvent watchedEvent) {
         try {
-            zooKeeper.getData(way, this, null);
+            zooKeeper.getData(path, this, null);
         } catch (InterruptedException | KeeperException e) {
             e.printStackTrace();
         }
