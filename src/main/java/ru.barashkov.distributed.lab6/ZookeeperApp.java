@@ -64,7 +64,7 @@ public class ZookeeperApp {
             binding
                     .thenCompose(ServerBinding::unbind)
                     .thenAccept(unbound -> system.terminate());
-            
+
             serversInfo.
                     append(SERVERS_INFO_STR_2).
                     append(args[ZOOKEEPER_PORT_ID]).
