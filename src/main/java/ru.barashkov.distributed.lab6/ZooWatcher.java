@@ -17,22 +17,21 @@ public class ZooWatcher implements Watcher {
     public ZooWatcher(ZooKeeper zooKeeper, ActorRef actorStorage) throws InterruptedException, KeeperException {
         this.zooKeeper = zooKeeper;
         this.actorStorage = actorStorage;
-        sendAnswer();
+        sendAnswer(zooKeeper.getChildren(SERVERS_PATH, this));
     }
 
     @Override
     public void process(WatchedEvent watchedEvent) {
         try {
-            zooKeeper.getChildren(SERVERS_PATH, this);
-            sendAnswer();
+            sendAnswer(zooKeeper.getChildren(SERVERS_PATH, this));
         } catch (InterruptedException | KeeperException e) {
             e.printStackTrace();
         }
     }
 
-    private void sendAnswer() throws InterruptedException, KeeperException {
+    private void sendAnswer(List<String> children) throws InterruptedException, KeeperException {
         List<String> servers = new ArrayList<>();
-        for (String s : zooKeeper.getChildren(SERVERS_PATH, this)) {
+        for (String s : children) {
             servers.add(new String(zooKeeper.getData(SERVERS_PATH + "/" + s, false, null)));
         }
         actorStorage.tell(

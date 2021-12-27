@@ -8,6 +8,9 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 
 public class ActorStorage extends AbstractActor {
+    private static final String TO_STRING_STR = "Servers in use: ";
+    private static final String TO_STRING_DELIMITER = "; ";
+
     private List<String> servers = new ArrayList<>();
     private final Random random = new Random();
 
@@ -20,9 +23,9 @@ public class ActorStorage extends AbstractActor {
 
     public String toString() {
         StringBuilder out = new StringBuilder();
-        out.append("Servers in use: ");
+        out.append(TO_STRING_STR);
         for (String s : servers) {
-            out.append(s).append("; ");
+            out.append(s).append(TO_STRING_DELIMITER);
         }
         return out.toString();
     }

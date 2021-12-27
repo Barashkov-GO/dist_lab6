@@ -56,8 +56,12 @@ public class ZookeeperApp {
                         ConnectHttp.toHost(HOST_IP, Integer.parseInt(args[ZOOKEEPER_PORT_ID])),
                         materializer
             );
-            serversInfo.append(SERVERS_INFO_STR_2).append(args[ZOOKEEPER_PORT_ID]).append(SERVERS_INFO_NEWLINE);
+            serversInfo.
+                    append(SERVERS_INFO_STR_2).
+                    append(args[ZOOKEEPER_PORT_ID]).
+                    append(SERVERS_INFO_NEWLINE);
             System.out.println("Server is starting at http://" + HOST_IP + ":" + Integer.parseInt(args[1]));
+            System.out.println(serversInfo);
         } catch (InterruptedException | KeeperException e) {
             e.printStackTrace();
         }
