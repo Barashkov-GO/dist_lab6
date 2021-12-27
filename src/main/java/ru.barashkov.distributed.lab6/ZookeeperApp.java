@@ -26,7 +26,7 @@ public class ZookeeperApp {
 
     private static final int ZOOKEEPER_ADDRESS_ID = 0;
     private static final int ZOOKEEPER_PORT_ID = 1;
-    private static final int ZOOKEEPER_TIMEOUT = 3000;
+    private static final int ZOOKEEPER_TIMEOUT = 5000;
 
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("routes");
