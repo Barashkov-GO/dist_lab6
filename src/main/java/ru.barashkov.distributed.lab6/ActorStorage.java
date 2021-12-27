@@ -12,10 +12,19 @@ public class ActorStorage extends AbstractActor {
     private final Random random = new Random();
 
     private String getRandomServer() {
-        System.out.println(String.valueOf(servers));
+        System.out.println(this.toString());
         return servers.get(
                 random.nextInt(servers.size())
         );
+    }
+
+    public String toString() {
+        StringBuilder out = new StringBuilder();
+        out.append("Servers in use: ");
+        for (String s : servers) {
+            out.append(s).append(", ");
+        }
+        return out.toString();
     }
 
     @Override
